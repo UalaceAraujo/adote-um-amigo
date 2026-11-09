@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adote um Amigo - Plataforma de Adoção Responsável de Animais</title>
+  <meta name="description" content="Encontre seu novo melhor amigo de quatro patas. Cães e gatos resgatados esperando por um lar cheio de amor e carinho.">
+  
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Estilos Customizados -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Barra de Notificação Superior -->
+  <aside class="top-banner" aria-label="Aviso de utilidade pública">
+    <div class="container banner-content">
+      <span><i class="fa-solid fa-heart" aria-hidden="true"></i> Adoção é um ato de amor e compromisso para a vida toda!</span>
+      <a href="#como-funciona" class="banner-link">Saiba como adotar</a>
+    </div>
+  </aside>
+
+  <!-- Cabeçalho / Navbar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="#" class="brand-logo" aria-label="Página Inicial Adote um Amigo">
+        <span class="logo-icon"><i class="fa-solid fa-paw"></i></span>
+        <span class="logo-text">Adote<span>UmAmigo</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#inicio" class="nav-link active">Início</a>
+        <a href="#catalogo" class="nav-link">Quero Adotar</a>
+        <a href="#como-funciona" class="nav-link">Como Funciona</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <button class="btn btn-primary" id="openNewPetModalBtn">
+          <i class="fa-solid fa-plus"></i> Divulgar Animal
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Seção Hero -->
+    <section class="hero-section" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="badge-pill"><i class="fa-solid fa-shield-heart"></i> Adoção Responsável</span>
+          <h1 class="hero-title">Dê uma segunda chance a quem só quer te amar.</h1>
+          <p class="hero-subtitle">Centenas de cães e gatos resgatados esperam ansiosamente por uma família. Encontre hoje o seu novo companheiro de vida e transforme um destino.</p>
+          <div class="hero-cta-group">
+            <a href="#catalogo" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-paw"></i> Ver Animais Disponíveis
+            </a>
+            <a href="#como-funciona" class="btn btn-outline btn-lg">
+              <i class="fa-solid fa-circle-question"></i> Processo de Adoção
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number" id="statsTotalAdopted">+250</span>
+              <span class="stat-label">Vidas Transformadas</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" id="statsWaiting">8</span>
+              <span class="stat-label">Aguardando Lar</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Amor Incondicional</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="hero-image-card">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Cachorros felizes correndo juntos no gramado" class="hero-img">
+            <div class="floating-badge">
+              <i class="fa-solid fa-sparkles"></i>
+              <div>
+                <strong>Castrados & Vacinados</strong>
+                <p>Prontos para fazerem parte da sua rotina</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo de Pets com Filtros Dinâmicos -->
+    <section class="catalog-section" id="catalogo">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Encontre Seu Companheiro</span>
+          <h2 class="section-title">Amigos esperando por você</h2>
+          <p class="section-desc">Utilize os filtros abaixo para encontrar o pet que mais combina com seu estilo de vida e lar.</p>
+        </div>
+
+        <!-- Filtros e Barra de Pesquisa -->
+        <div class="filter-card">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Pesquisar por nome, raça ou cidade..." aria-label="Campo de busca de animais">
+            <button class="clear-search-btn" id="clearSearchBtn" title="Limpar busca" style="display: none;">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div class="filter-controls">
+            <!-- Filtro Espécie -->
+            <div class="filter-group">
+              <label for="speciesFilter"><i class="fa-solid fa-shield-cat"></i> Espécie</label>
+              <select id="speciesFilter" class="filter-select">
+                <option value="all">Todas as espécies</option>
+                <option value="dog">Cachorros</option>
+                <option value="cat">Gatos</option>
+              </select>
+            </div>
+
+            <!-- Filtro Porte -->
+            <div class="filter-group">
+              <label for="sizeFilter"><i class="fa-solid fa-ruler"></i> Porte</label>
+              <select id="sizeFilter" class="filter-select">
+                <option value="all">Todos os portes</option>
+                <option value="Pequeno">Porte Pequeno</option>
+                <option value="Médio">Porte Médio</option>
+                <option value="Grande">Porte Grande</option>
+              </select>
+            </div>
+
+            <!-- Filtro Sexo -->
+            <div class="filter-group">
+              <label for="genderFilter"><i class="fa-solid fa-venus-mars"></i> Sexo</label>
+              <select id="genderFilter" class="filter-select">
+                <option value="all">Macho e Fêmea</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+              </select>
+            </div>
+
+            <!-- Botão Resetar Filtros -->
+            <div class="filter-group filter-actions">
+              <button class="btn btn-secondary btn-reset" id="resetFiltersBtn">
+                <i class="fa-solid fa-rotate-left"></i> Limpar Filtros
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-status-bar">
+            <span id="resultsCount">Mostrando 8 animais</span>
+            <div class="active-chips" id="activeFilterChips"></div>
+          </div>
+        </div>
+
+        <!-- Grid de Cards de Animais -->
+        <div class="pets-grid" id="petsGrid">
+          <!-- Renderizado dinamicamente via app.js -->
+        </div>
+
+        <!-- Estado Vazio (Nenhum animal encontrado) -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Nenhum amigo encontrado</h3>
+          <p>Tente ajustar ou limpar os filtros para visualizar outros pets disponíveis.</p>
+          <button class="btn btn-primary" id="emptyResetBtn">Ver todos os animais</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como Funciona o Processo de Adoção -->
+    <section class="how-it-works" id="como-funciona">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Passo a Passo</span>
+          <h2 class="section-title">Como funciona a adoção responsável?</h2>
+          <p class="section-desc">Garantimos um processo seguro e consciente tanto para a família quanto para o animal.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fa-solid fa-heart-circle-check"></i>
+              <span class="step-number">1</span>
+            </div>
+            <h3 class="step-title">Escolha o seu Pet</h3>
+            <p class="step-desc">Navegue pelas fotos, conheça o temperamento, porte e histórico de cada cão ou gato disponível.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span class="step-number">2</span>
+            </div>
+            <h3 class="step-title">Manifeste Interesse</h3>
+            <p class="step-desc">Clique em "Quero Adotar" para abrir um contato direto via WhatsApp com o protetor responsável ou preencher a ficha.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fa-solid fa-comments"></i>
+              <span class="step-number">3</span>
+            </div>
+            <h3 class="step-title">Conversa & Avaliação</h3>
+            <p class="step-desc">Uma rápida conversa sobre o ambiente, segurança da casa (redes de proteção, muros) e rotina dos novos tutores.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <i class="fa-solid fa-house-chimney-user"></i>
+              <span class="step-number">4</span>
+            </div>
+            <h3 class="step-title">Final Feliz no Novo Lar</h3>
+            <p class="step-desc">Assinatura do termo de responsabilidade e início de uma linda jornada repleta de companheirismo e carinho.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requisitos para Adoção Responsável -->
+    <section class="requirements-section" id="sobre">
+      <div class="container">
+        <div class="requirements-card">
+          <div class="req-header">
+            <i class="fa-solid fa-circle-exclamation req-icon"></i>
+            <div>
+              <h3>Requisitos básicos para adoção</h3>
+              <p>Critérios essenciais para assegurar a saúde e integridade do animal</p>
+            </div>
+          </div>
+          <ul class="req-list">
+            <li><i class="fa-solid fa-check"></i> Ter 18 anos ou mais de idade e documento com foto (RG/CPF).</li>
+            <li><i class="fa-solid fa-check"></i> Residência segura (apartamentos telados para gatos; casas sem rotas de fuga para cães).</li>
+            <li><i class="fa-solid fa-check"></i> Condições financeiras para alimentação de qualidade, vacinação anual e cuidados veterinários.</li>
+            <li><i class="fa-solid fa-check"></i> Concordância de todos os moradores da casa com a chegada do novo membro.</li>
+            <li><i class="fa-solid fa-check"></i> Assinatura do Termo de Guarda Responsável.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <span class="logo-icon"><i class="fa-solid fa-paw"></i></span>
+          <span class="logo-text">Adote<span>UmAmigo</span></span>
+        </div>
+        <p class="footer-about">Conectando corações e lares através do resgate e adoção responsável de animais abandonados e em situação de vulnerabilidade.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegação Rápida</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#catalogo">Cachorros e Gatos</a></li>
+          <li><a href="#como-funciona">Processo de Adoção</a></li>
+          <li><a href="#sobre">Dúvidas Frequentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Colabore</h4>
+        <ul>
+          <li><a href="javascript:void(0)" id="footerNewPetBtn">Divulgar um Animal</a></li>
+          <li><a href="#sobre">Seja um Lar Temporário</a></li>
+          <li><a href="#sobre">Pontos de Coleta de Ração</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato de Emergência</h4>
+        <p class="footer-info"><i class="fa-solid fa-location-dot"></i> Araraquara, SP e Região</p>
+        <p class="footer-info"><i class="fa-solid fa-envelope"></i> contato@adoteumamigo.org</p>
+        <p class="footer-info"><i class="fa-brands fa-whatsapp"></i> (16) 99999-9999</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="container bottom-flex">
+        <p>&copy; 2026 Adote um Amigo. Desenvolvido com amor para transformar vidas.</p>
+        <p>Projeto de Adoção e Proteção Animal</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: DETALHES DO PET -->
+  <div class="modal-overlay" id="petDetailModal" aria-hidden="true" role="dialog">
+    <div class="modal-container modal-lg">
+      <button class="modal-close-btn" id="closeDetailModalBtn" aria-label="Fechar janela de detalhes">&times;</button>
+      <div class="modal-body" id="petDetailModalBody">
+        <!-- Preenchido dinamicamente com app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FORMULÁRIO DE CADASTRO DE NOVO ANIMAL -->
+  <div class="modal-overlay" id="newPetModal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="closeNewPetModalBtn" aria-label="Fechar janela">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-solid fa-paw"></i> Divulgar Animal para Adoção</h3>
+        <p class="modal-subtitle">Preencha os dados do pet resgatado para exibi-lo no catálogo.</p>
+      </div>
+
+      <form id="newPetForm" class="form-grid">
+        <div class="form-group full-width">
+          <label for="petFormName">Nome do Pet *</label>
+          <input type="text" id="petFormName" required placeholder="Ex.: Mel, Thor, Jujuba">
+        </div>
+
+        <div class="form-group">
+          <label for="petFormSpecies">Espécie *</label>
+          <select id="petFormSpecies" required>
+            <option value="dog">Cachorro</option>
+            <option value="cat">Gato</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petFormBreed">Raça / Tipo *</label>
+          <input type="text" id="petFormBreed" required placeholder="Ex.: SRD, Mestiço Poodle">
+        </div>
+
+        <div class="form-group">
+          <label for="petFormGender">Sexo *</label>
+          <select id="petFormGender" required>
+            <option value="Macho">Macho</option>
+            <option value="Fêmea">Fêmea</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petFormSize">Porte *</label>
+          <select id="petFormSize" required>
+            <option value="Pequeno">Pequeno (até 10kg)</option>
+            <option value="Médio">Médio (11kg a 25kg)</option>
+            <option value="Grande">Grande (+25kg)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petFormAge">Idade aproximada *</label>
+          <input type="text" id="petFormAge" required placeholder="Ex.: 6 meses, 2 anos">
+        </div>
+
+        <div class="form-group">
+          <label for="petFormLocation">Cidade/Estado *</label>
+          <input type="text" id="petFormLocation" required placeholder="Ex.: Araraquara, SP">
+        </div>
+
+        <div class="form-group full-width">
+          <label for="petFormPhoto">URL da Foto do Pet *</label>
+          <input type="url" id="petFormPhoto" required placeholder="https://exemplo.com/foto-do-pet.jpg">
+          <small class="form-hint">Dica: Você pode usar imagens do Unsplash ou links de fotos públicas.</small>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="petFormWhatsapp">WhatsApp do Responsável (DDD + Número) *</label>
+          <input type="tel" id="petFormWhatsapp" required placeholder="Ex.: 16999998888">
+        </div>
+
+        <div class="form-group full-width">
+          <label>Condições de Saúde:</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="petFormVaccinated" checked> Vacinado(a)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="petFormNeutered" checked> Castrado(a)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="petFormDewormed" checked> Vermifugado(a)
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="petFormDescription">História & Personalidade *</label>
+          <textarea id="petFormDescription" rows="3" required placeholder="Conte um pouco sobre o comportamento, convivência e temperamento do pet..."></textarea>
+        </div>
+
+        <div class="form-actions full-width">
+          <button type="button" class="btn btn-secondary" id="cancelNewPetBtn">Cancelar</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Cadastrar e Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: FORMULÁRIO DE INTERESSE DE ADOÇÃO (WHATSAPP SENDER) -->
+  <div class="modal-overlay" id="adoptInterestModal" aria-hidden="true" role="dialog">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="closeInterestModalBtn" aria-label="Fechar janela">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-solid fa-heart"></i> Quero Adotar</h3>
+        <p class="modal-subtitle" id="interestModalPetTarget">Preencha seus dados para conectar com o protetor via WhatsApp.</p>
+      </div>
+
+      <form id="adoptionInterestForm" class="form-grid">
+        <input type="hidden" id="interestPetId">
+
+        <div class="form-group full-width">
+          <label for="adopterName">Seu Nome Completo *</label>
+          <input type="text" id="adopterName" required placeholder="Ex.: Carlos da Silva">
+        </div>
+
+        <div class="form-group">
+          <label for="adopterCity">Sua Cidade / Bairro *</label>
+          <input type="text" id="adopterCity" required placeholder="Ex.: Araraquara - Centro">
+        </div>
+
+        <div class="form-group">
+          <label for="adopterHomeType">Tipo de Moradia *</label>
+          <select id="adopterHomeType" required>
+            <option value="Casa com quintal seguro">Casa com quintal seguro</option>
+            <option value="Apartamento telado">Apartamento com telas</option>
+            <option value="Chácara / Sítio">Chácara / Sítio</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="adopterOtherPets">Você já possui outros animais em casa? *</label>
+          <input type="text" id="adopterOtherPets" required placeholder="Ex.: Tenho 1 gatinho castrado e dócil">
+        </div>
+
+        <div class="form-group full-width">
+          <label for="adopterMessage">Mensagem para o protetor (opcional)</label>
+          <textarea id="adopterMessage" rows="2" placeholder="Ex.: Gostaria de agendar uma visita para conhecer o pet..."></textarea>
+        </div>
+
+        <div class="form-actions full-width">
+          <button type="button" class="btn btn-secondary" id="cancelInterestBtn">Voltar</button>
+          <button type="submit" class="btn btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> Conversar no WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Feedback -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
